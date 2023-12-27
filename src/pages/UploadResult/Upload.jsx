@@ -9,6 +9,7 @@ function Upload() {
     const [rowData, setRowData] = useState([]);
     const [selectedClass, setSelectedClass] = useState('1');
     const [selectedSection, setSelectedSection] = useState('A');
+    const [loaderState, setLoaderState] = useState(false)
     console.log(rowData)
 
     const db = getFirestore();
@@ -64,12 +65,15 @@ function Upload() {
     // };
 
     const handleUpload = async () => {
+        setLoaderState(true)
         const docRef = await addDoc(collection(db, "myCollection"), {
             rowData: [...rowData],
         });
         console.log({
             rowData: [...rowData],
         });
+        window.location.reload()
+        setLoaderState(false)
         notification.success({
             message: "Uploaded Successfully"
         })
@@ -178,7 +182,7 @@ function Upload() {
             <div className="row my-4">
                 <div className="col-md-12 text-end">
                     <button className='btn btn-primary me-2' onClick={addRow}>Add Row</button>
-                    <button className='btn btn-success' onClick={handleUpload}>Upload Result</button>
+                    <button className='btn btn-success' onClick={handleUpload} disabled={loaderState}>Upload Result</button>
                 </div>
             </div>
             <div className="row">

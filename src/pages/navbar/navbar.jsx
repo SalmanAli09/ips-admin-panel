@@ -22,13 +22,13 @@ function Navbar() {
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <Link class="nav-link" to="/result" >Results</Link>
+                            {/* <Link class="nav-link" to="/result" >Results</Link> */}
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="#" >Dashboard</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="https://islamiapublicschool.vercel.app/" >IPS Website</a>
+                            <a class="nav-link" href="www.islamiapublicschool.com" >IPS Website</a>
                         </li>
                     </ul>
                 </div>

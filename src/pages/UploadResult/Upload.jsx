@@ -10,24 +10,8 @@ function Upload() {
     const [selectedClass, setSelectedClass] = useState('1');
     const [selectedSection, setSelectedSection] = useState('A');
     const [loaderState, setLoaderState] = useState(false)
-    console.log(rowData)
 
     const db = getFirestore();
-
-
-
-    const fetchDataFromFirestore = async () => {
-        const querySnapshot = await getDocs(collection(db, "myCollection"));
-        const temporaryArr = [];
-        querySnapshot.forEach((doc) => {
-            temporaryArr.push(doc.data());
-        });
-        setStoredValues(temporaryArr);
-    };
-
-
-
-
 
     const addRow = () => {
         setRowData((prevData) => [
@@ -54,15 +38,7 @@ function Upload() {
         ]);
     };
 
-    // const handleUpload = async () => {
-    //     console.log(rowData);
-    //     const docRef = await addDoc(collection(db, "myCollection"), {
-    //         rowData
-    //     });
-    //     notification.success({
-    //         message: "Uploaded Successfully"
-    //     })
-    // };
+
 
     const handleUpload = async () => {
         setLoaderState(true)
@@ -72,26 +48,13 @@ function Upload() {
         console.log({
             rowData: [...rowData],
         });
-        window.location.reload()
         setLoaderState(false)
         notification.success({
             message: "Uploaded Successfully"
-        })
+        });
+        setRowData([]);
     }
 
-    // const handleCellChange = (index, field, value) => {
-    //     setRowData((prevData) => {
-    //         const newData = [...prevData];
-    //         newData[index][field] = value;
-    //         return newData;
-    //     });
-    //     if(field === "quranMajeed" && field[quranMajeed].value > 75){
-    //         alert("max mark for this is 75")
-    //     }
-    // };
-
-
-    // ...
 
     const handleCellChange = (index, field, value) => {
         setRowData((prevData) => {
@@ -122,8 +85,6 @@ function Upload() {
 
             let percentage_com = (currentRow.total / 675) * 100;
             console.log(percentage_com)
-
-            // const maxTotal = subjectFields.length * 100;
             currentRow.percentage = percentage_com.toFixed(2) + '%';
 
             if (percentage_com >= 90) {
